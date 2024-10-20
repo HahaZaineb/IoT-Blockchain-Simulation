@@ -108,12 +108,11 @@ abi=[
 		"type": "function"
 	}
 ]
-# Load contract ABI and address
+
 contract_address = '0x557A2cBbA09911F28FBed7713F68eAE672443945'
 contract = web3.eth.contract(address=contract_address, abi=abi)
 
-# Private key of your default account (replace with yours; keep it secure!)
-PRIVATE_KEY = '5772315b9bc164a3a63ae4a501a09ff5d2c8704c0bea954b10aea49064d5a8cc'
+PRIVATE_KEY = 'private key'
 
 @app.route('/')
 def index():
@@ -122,7 +121,7 @@ def index():
 @app.route('/log_data', methods=['POST'])
 def log_data():
     try:
-        # Collect data from the frontend
+        
         temperature = int(request.form['temperature'])
         humidity = int(request.form['humidity'])
 
@@ -135,7 +134,7 @@ def log_data():
 
         # Sign the transaction with the private key
         signed_txn = web3.eth.account.sign_transaction(txn, private_key=PRIVATE_KEY)
-		#print(signed_txn)
+		
         # Send the signed transaction
         tx_hash = web3.eth.send_raw_transaction(signed_txn.raw_transaction)
 
