@@ -8,7 +8,7 @@
     <title>IoT Data Logger</title>
     <script>
         async function logData(event) {
-            event.preventDefault();  // Prevent form submission
+            event.preventDefault();  
 
             const formData = new FormData(event.target);
             const response = await fetch('/log_data', {
@@ -16,18 +16,18 @@
                 body: formData
             });
 
-            const result = await response.text();  // Get response text
-            document.getElementById('log_result').innerText = result;  // Display result
+            const result = await response.text();  
+            document.getElementById('log_result').innerText = result;  
         }
 
         async function getDataLength() {
             const response = await fetch('/get_data_length');
             const result = await response.json();
-            document.getElementById('length_result').innerText = `Data Length: ${result.data_length}`;  // Display result
+            document.getElementById('length_result').innerText = `Data Length: ${result.data_length}`;  
         }
 
         async function retrieveData(event) {
-            event.preventDefault();  // Prevent form submission
+            event.preventDefault();  
 
             const indexInput = document.querySelector('input[name="index"]');
             const index = indexInput.value;
@@ -35,7 +35,7 @@
             const response = await fetch(`/get_data/${index}`);
             const data = await response.json();
 
-            document.getElementById('data_result').innerText = `Timestamp: ${data.timestamp}, Temperature: ${data.temperature}, Humidity: ${data.humidity}`;  // Display result
+            document.getElementById('data_result').innerText = `Timestamp: ${data.timestamp}, Temperature: ${data.temperature}, Humidity: ${data.humidity}`; 
         }
     </script>
 </head>
@@ -48,7 +48,7 @@
         <input type="number" name="humidity" required>
         <button type="submit">Log Data</button>
     </form>
-    <div id="log_result"></div>  <!-- Display log result here -->
+    <div id="log_result"></div>  
 
     <h2>Retrieve Data</h2>
     <form onsubmit="retrieveData(event);">
@@ -56,10 +56,10 @@
         <input type="number" name="index" required>
         <button type="submit">Get Data</button>
     </form>
-    <div id="data_result"></div>  <!-- Display data result here -->
+    <div id="data_result"></div>  
 
     <h2>Data Length</h2>
     <button onclick="getDataLength()">Get Data Length</button>
-    <div id="length_result"></div>  <!-- Display data length here -->
+    <div id="length_result"></div>  
 </body>
 </html>
