@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract IoTDataLogger {
+    struct SensorData {
+        uint256 timestamp;
+        int256 temperature;
+        int256 humidity;
+    }
+
+    SensorData[] public dataLog;
+
+    function logData(int256 _temperature, int256 _humidity) public {
+        dataLog.push(SensorData(block.timestamp, _temperature, _humidity));
+    }
+
+    function getData(uint256 index) public view returns (uint256, int256, int256) {
+        SensorData memory data = dataLog[index];
+        return (data.timestamp, data.temperature, data.humidity);
+    }
+
+    function getDataLength() public view returns (uint256) {
+        return dataLog.length;
+    }
+}
